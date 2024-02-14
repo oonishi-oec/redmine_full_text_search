@@ -75,6 +75,10 @@ module FullTextSearch
       def wiki_page
         find_or_create_by(name: "WikiPage")
       end
+
+      def kb_article
+        find_or_create_by(name: "KbArticle")
+      end
     end
   end
 end

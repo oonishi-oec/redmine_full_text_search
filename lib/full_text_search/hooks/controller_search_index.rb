@@ -36,9 +36,11 @@ module FullTextSearch
                                 "timestamp" => Time.zone.now.iso8601)
         log = "[full-text-search][search] #{context.to_json}"
         Rails.logger.info(log)
+        p "DEBUG: controller_search_index.rb:39"
         @result_pages = Redmine::Pagination::Paginator.new(@result_set.n_hits,
                                                            @search_request.limit,
                                                            params["page"])
+        p "DEBUG: controller_search_index.rb:43"
 
         respond_to do |format|
           format.html { render layout: false if request.xhr? }

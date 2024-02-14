@@ -4,6 +4,7 @@ module FullTextSearch
       include FullTextSearch::Hooks::SettingsHelper
 
       def search_result_entry_url(e, i)
+        p "DEBUG: search_helper.rb:8"
         if fts_enable_tracking?
           search_parameters = {
             "search_id" => @search_request.search_id,
@@ -12,7 +13,10 @@ module FullTextSearch
         else
           search_parameters = {}
         end
-        e.event_url.merge(search_parameters)
+        p ["DEBUG: search_helper.rb:16",search_parameters]
+        x = e.event_url.merge(search_parameters)
+        p ["DEBUG: search_helper.rb:18",x]
+        x
       end
     end
   end
