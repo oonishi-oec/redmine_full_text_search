@@ -14,7 +14,6 @@ module FullTextSearch
 
   class RedmineKbArticleMapper < RedmineMapper
     def upsert_fts_target(options={})
-      p "DEBUG: kb_article_mapper.rb:17"
       fts_target = find_fts_target
       fts_target.source_id = @record.id
       fts_target.source_type_id = Type[@record.class].id
@@ -29,12 +28,10 @@ module FullTextSearch
 
   class FtsKbArticleMapper < FtsMapper
     def title_prefix
-      p "DEBUG: kb_article_mapper.rb:32"
       ""
     end
 
     def url
-      p "DEBUG: kb_article_mapper.rb:37"
       {
         #controller: "documents",
         controller: "articles",
