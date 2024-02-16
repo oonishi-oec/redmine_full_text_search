@@ -7,7 +7,6 @@ module FullTextSearch
 
     def perform(record_class_name, record_id, action, options={})
       record_class = record_class_name.constantize
-      p "DEBUG:update_issue_content_job.rb:10"
 
       case action
       when "commit"
@@ -43,7 +42,6 @@ module FullTextSearch
 
     private
     def create_contents(issue_id, excludes: [])
-      p "DEBUG:update_issue_content_job.rb:45"
       issue = Issue.eager_load(:journals).find(issue_id)
       contents = [issue.subject, issue.description]
       notes = issue.journals

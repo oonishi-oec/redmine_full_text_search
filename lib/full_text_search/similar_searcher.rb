@@ -2,8 +2,6 @@ module FullTextSearch
   module SimilarSearcher
     module Model
       def self.included(base)
-        
-        p "DEBUG: similar_searcher.rb:6"
         base.include(InstanceMethods)
         base.class_eval do
           after_commit Callbacks
@@ -24,7 +22,6 @@ module FullTextSearch
 
       module InstanceMethods
         def filter_condition(user = User.current, project_ids = [])
-          p "DEBUG: similar_searcher.rb:27"
           conditions = []
           target_ids = Project.allowed_to(user, :view_issues).pluck(:id)
           target_ids &= project_ids if project_ids.present?
@@ -46,7 +43,6 @@ module FullTextSearch
       class Callbacks
         class << self
           def after_commit(record)
-            p "DEBUG: similar_searcher.rb:49"
             FullTextSearch::UpdateIssueContentJob
               .perform_later(record.class.name,
                              record.id,
@@ -54,7 +50,6 @@ module FullTextSearch
           end
 
           def after_destroy(record)
-            p "DEBUG: similar_searcher.rb:57"
             # TODO: Refine
             case record
             when Issue

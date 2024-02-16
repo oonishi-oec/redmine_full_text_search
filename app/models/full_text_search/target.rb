@@ -130,7 +130,6 @@ module FullTextSearch
     end
 
     def _url
-      p ["DEBUG: target.rb:132", mapper.url]
       mapper.url
     end
 
@@ -160,7 +159,7 @@ module FullTextSearch
           [h((event_description || "").truncate(255)).html_safe]
         end
     end
-    
+
     def tags
       Tag.where(id: tag_ids || [])
     end

@@ -7,9 +7,7 @@ Redmine::Plugin.register :full_text_search do
   author_url 'https://github.com/clear-code'
   directory __dir__
   settings partial: "settings/full_text_search"
-
 end
-
 
 Redmine::Search.map do |search|
   search.register :changes
@@ -85,7 +83,6 @@ prepare = lambda do
   FullTextSearch::Tag
   FullTextSearch::TagType
   FullTextSearch::Type
-
 end
 
 # We need to initialize explicitly with Redmine 5.0 or later.

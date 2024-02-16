@@ -2,13 +2,11 @@ module FullTextSearch
   class BatchRunner
     def initialize(show_progress: false)
       @show_progress = show_progress
-      p "DEBUG: batch_runner.rb:5"
     end
 
     def synchronize(project: nil,
                     upsert: nil,
                     extract_text: nil)
-      p "DEBUG: batch_runner.rb:11"
       options = Options.new(project, upsert, extract_text)
       synchronize_fts_targets_internal(options)
     end
@@ -16,7 +14,6 @@ module FullTextSearch
     def synchronize_fts_targets(project: nil,
                                 upsert: nil,
                                 extract_text: nil)
-      p "DEBUG: batch_runner.rb:19"
       options = Options.new(project, upsert, extract_text)
       synchronize_fts_targets_internal(options)
     end
@@ -24,7 +21,6 @@ module FullTextSearch
     def synchronize_repositories(project: nil,
                                  upsert: nil,
                                  extract_text: nil)
-      p "DEBUG: batch_runner.rb:27"
       options = Options.new(project, upsert, extract_text)
       synchronize_repositories_internal(options)
     end
@@ -32,7 +28,6 @@ module FullTextSearch
     def synchronize_similar_issues(project: nil,
                                    upsert: nil,
                                    extract_text: nil)
-      p "DEBUG: batch_runner.rb:35"
       options = Options.new(project, upsert, extract_text)
       synchronize_similar_issues_internal(options)
     end
@@ -40,7 +35,6 @@ module FullTextSearch
     def reload_fts_targets(project: nil,
                            upsert: nil,
                            extract_text: nil)
-      p "DEBUG: batch_runner.rb:43"
       options = Options.new(project, upsert, extract_text)
       if options.project
         targets = Target.where(project_id: options.project.id)
@@ -68,7 +62,6 @@ module FullTextSearch
     end
 
     def extract_text(ids: nil)
-      p "DEBUG: batch_runner.rb:71"
       attachments = Target.where(source_type_id: Type.attachment.id)
       attachments = attachments.where(id: ids) if ids
       bar = create_progress_bar("Extract",
